@@ -80,7 +80,8 @@ test_sequences = pad_sequences(test_sequences, maxlen=max_len, padding='post', t
 
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Embedding(input_dim=len(tokenizer.word_index) + 1, output_dim=32, input_length=max_len))
-model.add(tf.keras.layers.LSTM(16))
+model.add(tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(16, activation='tanh', return_sequences=True)))
+model.add(tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(16)))
 model.add(tf.keras.layers.Dense(32, activation='relu'))
 model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
 
